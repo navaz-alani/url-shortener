@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option go_package = "github.com/navaz-alani/url-shortener/pb";
+
+package pb;
+
+service Shortener {
+  rpc Shorten(ShortenReq) returns (Short) {};
+  rpc UnShorten(Short) returns (Url) {};
+}
+
+message Url {
+  string Url = 1;
+}
+
+message ShortenReq {
+  string Url = 1;
+  string RequestedStub = 2;
+}
+
+message Short {
+  string stub = 1;
+}

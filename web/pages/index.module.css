@@ -1,0 +1,32 @@
+.app {
+  min-height: 90vh;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  text-align: center;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto;
+  width: 75%;
+}
+
+.app-button {
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 1rem;
+}
+
+.app-field {
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.app-error {
+  color: red;
+}
