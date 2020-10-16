@@ -3,10 +3,10 @@ BIN=shortener-svr
 GXX_SRC=$(wildcard **/*.go)
 PROTO=protoc
 PROTO_DEF=./pb/shortener.proto
-PROTO_TS_OUT=./pb/ts
+PROTO_TS_OUT=./web/pb
 PROTO_GO_OUT=./pb/go
 
-.PHONY: grpc-go grpc-ts clean
+.PHONY: grpc-go grpc-ts clean clean-grpc
 
 $(BIN): $(GXX_SRC)
 	$(GXX) build -o $(BIN) .
@@ -24,3 +24,6 @@ grpc-ts: $(PROTO_DEF)
 
 clean:
 	rm -rf $(BIN)
+
+clean-grpc:
+	rm -rf $(PROTO_TS_OUT) $(PROTO_GO_OUT)

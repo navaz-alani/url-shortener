@@ -6,7 +6,7 @@
       "@hooks/*": ["./src/hooks/*"],
       "@types/*": ["./src/types/*"],
       "@utils/*": ["./src/utils/*"],
-      "@pb/*": ["./pb/*"]
+      "@pb/*": ["./pb/pb/*"]
     },
     "target": "es5",
     "lib": [
