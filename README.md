@@ -10,3 +10,9 @@ are 3 components, which tend to be common with grpc-web applications:
 * `go-server` is the backend service
 * `envoy` is the proxy
 * `fe-client` is the frontend client
+
+## Build & Deploy
+
+Using the command `docker-compose up -d`, all 3 services will initialise in the
+background. The port 3000 is for the frontend and the port 10000 is for the
+backend `grpc-proxy` container.
