@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
+	"sync"
 
 	"github.com/navaz-alani/url-shortener/pb/go/pb"
 )
@@ -14,18 +14,23 @@ type shortenerSvr struct {
   	pb.UnimplementedShortenerServer
     stubs map[string]string
     urls  map[string]string
+    mu sync.Mutex
 }
 
 func newServer() *shortenerSvr {
 	return &shortenerSvr{
     stubs: make(map[string]string),
     urls:  make(map[string]string),
+    mu:    sync.Mutex{},
   }
 }
 
 
 func (s *shortenerSvr) Shorten(c context.Context, u *pb.ShortenReq) (res *pb.Short, err error) {
-  res= &pb.Short{}
+  s.mu.Lock()
+  defer s.mu.Unlock()
+
+  res = &pb.Short{}
   if _, ok := s.stubs[u.RequestedStub]; u.RequestedStub != "" && !ok {
     s.stubs[u.RequestedStub] = u.Url
     res.Stub = u.RequestedStub
@@ -47,6 +52,9 @@ func (s *shortenerSvr) Shorten(c context.Context, u *pb.ShortenReq) (res *pb.Sho
 }
 
 func (s *shortenerSvr) UnShorten(c context.Context, u *pb.Short) (res *pb.Url, err error) {
+  s.mu.Lock()
+  defer s.mu.Unlock()
+
   res = &pb.Url{}
   if url, ok := s.stubs[u.Stub]; !ok {
     return res, fmt.Errorf("No such stub")

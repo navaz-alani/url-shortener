@@ -19,7 +19,6 @@ const Home: React.FC = () => {
     req.setUrl(url);
     req.setRequestedstub(reqStub);
     client.shorten(req, null, (err: any, resp: typeof Short) => {
-      console.log("callback", err, resp);
       if (err) { setErr(err.message); return; }
       setLog([ ...log, { url: url, stub: resp.getStub() } ]);
     });
