@@ -4,6 +4,8 @@ import { Log as LogT } from "./../src/types/types";
 import Log from "@components/log/Log";
 const { ShortenerClient } = require("@pb/ShortenerServiceClientPb");
 const { ShortenReq, Short } = require("@pb/shortener_pb");
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 
 
 const Home: React.FC = () => {
@@ -12,7 +14,7 @@ const Home: React.FC = () => {
   let [log, setLog] = React.useState<LogT>([]);
 
   const shorten = (url: string, reqStub: string) => {
-    let client = new ShortenerClient("http://0.0.0.0:10010", null, null),
+    let client = new ShortenerClient(publicRuntimeConfig.GRPC_PROXY, null, null),
     req = new ShortenReq();
     req.setUrl(url);
     req.setRequestedstub(reqStub);

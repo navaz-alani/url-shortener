@@ -25,7 +25,6 @@ func newServer() *shortenerSvr {
 
 
 func (s *shortenerSvr) Shorten(c context.Context, u *pb.ShortenReq) (res *pb.Short, err error) {
-  log.Print("Got req", u)
   res= &pb.Short{}
   if _, ok := s.stubs[u.RequestedStub]; u.RequestedStub != "" && !ok {
     s.stubs[u.RequestedStub] = u.Url
