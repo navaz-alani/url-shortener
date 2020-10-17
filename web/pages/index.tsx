@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./index.module.css";
-import { Log as LogT } from "@types/types";
+import { Log as LogT } from "./../src/types/types";
 import Log from "@components/log/Log";
 const { ShortenerClient } = require("@pb/ShortenerServiceClientPb");
 const { ShortenReq, Short } = require("@pb/shortener_pb");

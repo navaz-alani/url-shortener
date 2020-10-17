@@ -1,0 +1,46 @@
+version: "2.4"
+services:
+  go-server:
+    #container_name: grpc_server
+    image: golang:latest
+    restart: always
+    volumes:
+      - .:/go/src/shortener
+    command: make --directory=src/shortener
+    networks:
+      grpc:
+        ipv4_address: "172.16.238.10"
+
+  envoy:
+    #container_name: grpc_proxy
+    #image: url-shortener_envoy
+    build:
+      context: ./
+      dockerfile: ./web/envoy/Dockerfile
+    ports:
+      - "10010:10010"
+    #command: envoy -c /etc/envoy/envoy.yaml
+    networks:
+      grpc:
+        ipv4_address: "172.16.238.11"
+
+  fe-client:
+    #container_name: frontend
+    image: node:latest
+    restart: always
+    volumes:
+      - ./web:/frontend
+    ports:
+      - "3000:3000"
+    links:
+      - envoy
+    command: ./frontend/deploy.sh
+
+networks:
+  grpc:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1

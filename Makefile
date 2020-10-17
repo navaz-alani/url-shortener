@@ -6,9 +6,13 @@ PROTO_DEF=./pb/shortener.proto
 PROTO_TS_OUT=./web/pb
 PROTO_GO_OUT=./pb/go
 
-.PHONY: grpc-go grpc-ts clean clean-grpc
+.PHONY: exec grpc-go grpc-ts clean clean-grpc
+
+exec: $(BIN)
+	./$(BIN)
 
 $(BIN): $(GXX_SRC)
+	go get
 	$(GXX) build -o $(BIN) .
 
 grpc-go: $(PROTO_DEF)

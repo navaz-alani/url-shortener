@@ -1,4 +1,4 @@
-import { LogEntry, Log as LogT } from "@types/types";
+import { LogEntry, Log as LogT } from "./../../types/types";
 import styles from "./Log.module.css";
 import React from "react";
 
