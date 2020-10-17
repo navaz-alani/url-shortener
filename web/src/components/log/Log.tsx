@@ -14,7 +14,7 @@ const Log: React.FC<Props> = ({ log }) => {
         return (
           <div className={styles["log-entry"]} key={i}>
             <p>URL: {e.url}</p>
-            <p>Stub: {e.stub}</p>
+            <p>Stub: <a href={e.stub}>{e.stub}</a></p>
           </div>
         );
       })
