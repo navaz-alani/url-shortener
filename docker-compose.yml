@@ -17,7 +17,7 @@ services:
       context: ./
       dockerfile: ./web/envoy/Dockerfile
     ports:
-      - "10010:10010"
+      - "4001:10010"
     networks:
       grpc:
 
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./web:/frontend
     ports:
-      - "3000:3000"
+      - "4000:3000"
     links:
       - envoy
     command: ./frontend/deploy.sh

@@ -1,4 +1,4 @@
-# url-shortener
+# [url-shortener](https://url.navaz.me)
 
 ## About
 
@@ -11,8 +11,13 @@ are 3 components, which tend to be common with grpc-web applications:
 * `envoy` is the proxy
 * `fe-client` is the frontend client
 
+Currently hosted at: https://url.navaz.me
+
 ## Build & Deploy
 
 Using the command `docker-compose up -d`, all 3 services will initialise in the
-background. The port 3000 is for the frontend and the port 10000 is for the
-backend `grpc-proxy` container.
+background. The port 4000 is for the frontend and the port 4001 is for the
+backend `grpc-proxy` container. There exists an nginx configuration file which
+proxies requests to their respective services (`fe-client` and `envoy`
+services).
+
